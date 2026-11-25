@@ -9,6 +9,15 @@ on:
   pull_request:
     branches: [ main, master ]
 
+# EnricoMi/publish-unit-test-result-action creates a check run and a PR comment, so
+# it needs checks: write and pull-requests: write, which the fork's read-only default
+# token does not grant. contents: read is for actions/checkout. The action also lists
+# issues: read, but only for private repositories.
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
